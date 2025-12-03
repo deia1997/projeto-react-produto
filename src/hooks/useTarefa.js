@@ -42,7 +42,7 @@ const useProduto = () => {
     const novaLista = listaProdutos.filter((p) => p.id !== id);
     setListaProdutos(novaLista);
 
-    alert (" O produto foi excluído  sucesso!");
+    alert ("O produto foi excluído  sucesso!");
   };
 
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ const useProduto = () => {
 
     setListaProdutos(novaLista);
 
-    alert("Produto alterado com sucesso!");
+    alert("O produto foi alteradoado com sucesso!");
   };
 
   return {
