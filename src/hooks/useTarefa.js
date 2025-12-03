@@ -1,80 +1,80 @@
-import { useEffect, useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
 
-const useTarefa = () =>{ 
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const [tarefa, setTarefa] = useState(
-{
-id: null,
-titulo: "",
-finalizada: false
-}
-)
+const useProduto = () => {
 
-const [listaTarefas, setListaTarefas] = useState(() => {
-const listaTarefas_storage = localStorage.getItem("listaTarefas")
-return listaTarefas_storage?JSON.parse(listaTarefas_storage): []
-})
+  const [produto, setProduto] = useState({
+    id: null,
+    nome: "",
+    valor: ""
+  });
 
-useEffect(() => {
-localStorage.setItem("listaTarefas", JSON.stringify(listaTarefas))
-}, [listaTarefas])
+  const [listaProdutos, setListaProdutos] = useState(() => {
+    const lista_storage = localStorage.getItem("listaProdutos");
+    return lista_storage ? JSON.parse(lista_storage) : [];
+  });
 
-const exibirMensagem = (color, msg) =>{
-const divMesagem = document.getElementById("divMensagem")
-divMesagem.style.color = color
-divMesagem.textContent = msg
-}
+  useEffect(() => {
+    localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+  }, [listaProdutos]);
 
-const adicionar_tarefa = (titulo) => {
-const novaTarefa = {
-id: Math.random(),
-titulo: titulo,
-finalizada: false
-}
-const novaListaTarefas = [...listaTarefas, novaTarefa]
-setListaTarefas(novaListaTarefas)
-alert("Tarefa adicionada com sucesso!")
+  const exibirMensagem = (color, msg) => {
+    const divMensagem = document.getElementById("divMensagem");
+    divMensagem.style.color = color;
+    divMensagem.textContent = msg;
+  };
 
-}
+  const adicionar_produto = (id, nome, valor) => {
+    const novoProduto = {
+      id: Math.random(),
+      nome: nome,
+      valor: valor
+    };
 
-const excluir_tarefa = (id) =>{
-const novaListaTarefas = listaTarefas.filter(tarefa => tarefa.id !== id)
-setListaTarefas(novaListaTarefas)
-alert("Tarefa excluída com sucesso!")
-}
-const navigate = useNavigate()
-const exibir_detalhes_tarefa = (id) => {
-const tarefa = listaTarefas.find(tarefa => tarefa.id === id)
-navigate("/tarefaDetalhes", {state: tarefa} )
+    const novaLista = [...listaProdutos, novoProduto];
+    setListaProprodutoovaLista);
 
-}
+    alert("O produto foi adicionado com sucesso!");
+  };
+  
+    const excluir_produto = (id) => {
+    const novaLista = listaProdutos.filter((p) => p.id !== id);
+    setListaProdutos(novaLista);
 
-const alterar_tarefa = (tarefa_editada) =>{
-const novaListaTarefas = listaTarefas.map(tarefa => {
-if(tarefa.id === tarefa_editada.id){
-return tarefa_editada
-}else {
-return tarefa
-}
-})
+    alert (" O produto foi excluído  sucesso!");
+  };
 
-setListaTarefas(novaListaTarefas)
+  const navigate = useNavigate();
 
-alert("Tarefa alterada Com sucesso! ")
+  const exibir_detalhes_produto = (id) => {
+    const produto = listaProdutos.find((p) => p.id === id);
+    navigate("/produtoDetalhes", { state: produto });
+  };
 
-}
+  const alterar_produto = (produto_editado) => {
+    const novaLista = listaProdutos.map((p) => {
+      if (p.id === produto_editado.id) {
+        return produto_editado;
+      } else {
+        return p;
+      }
+    });
 
-return({
-listaTarefas, 
+    setListaProdutos(novaLista);
 
-adicionar_tarefa,
-excluir_tarefa,
-exibirMensagem,
-exibir_detalhes_tarefa,
-alterar_tarefa
-})
+    alert("Produto alterado com sucesso!");
+  };
 
-}
+  return {
+    listaProdutos,
+    exibirMensagem,
+    adicionar_produto,
+    excluir_produto,
+    exibir_detalhes_produto,
+    alterar_produto
+  };
+};
 
-export default useTarefa
+export default useProduto;
+Produto
